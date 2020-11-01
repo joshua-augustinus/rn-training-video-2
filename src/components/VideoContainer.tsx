@@ -9,7 +9,7 @@ import Video from 'react-native-video';
 // on a single screen if you like.
 
 
-const VIDEO_URL = "https://filesamples.com/samples/video/mp4/sample_1280x720.mp4";
+const VIDEO_URL = "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4";
 
 const VideoContainer = () => {
     const onBuffer = () => { }
@@ -17,7 +17,7 @@ const VideoContainer = () => {
 
     return (
 
-        <Video source={{ uri: VIDEO_URL }}
+        <Video source={{ uri: VIDEO_URL }} controls={true}
             onBuffer={onBuffer}
             onError={videoError}
             style={styles.backgroundVideo} />

@@ -49,6 +49,6 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: '#E7E7E7',
         backgroundColor: 'red',
-        height: 52
+    
     }
 });

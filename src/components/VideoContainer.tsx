@@ -11,26 +11,24 @@ import Orientation from 'react-native-orientation-locker';
 // on a single screen if you like.
 
 
-const VIDEO_URL = "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4";
+const VIDEO_URL = "https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4";
 
-const VideoContainer = () => {
+interface Props{
+    onEnterFullScreen:()=>void,
+    onExitFullScreen:()=>void
+}
+
+const VideoContainer = (props:Props) => {
     const onBuffer = () => { }
     const videoError = () => { }
 
-    const onEnterFullscreen = () => {
-        console.log("FULL SCREEN");
-        Orientation.lockToLandscapeLeft();
-    }
 
-    const onExitFullscreen = () => {
-        Orientation.lockToPortrait();
-    }
 
     return (
 
         <VideoPlayer source={{ uri: VIDEO_URL }}
-            onExitFullscreen={onExitFullscreen} controls={false}
-            onEnterFullscreen={onEnterFullscreen}
+            onExitFullscreen={props.onExitFullScreen} controls={false}
+            onEnterFullscreen={props.onEnterFullScreen}
             onBuffer={onBuffer}
             onError={videoError}
             style={styles.backgroundVideo} />
@@ -47,6 +45,6 @@ var styles = StyleSheet.create({
         left: 0,
         bottom: 0,
         right: 0,
-        backgroundColor: 'blue'
+        backgroundColor: 'black'
     },
 });

@@ -2,7 +2,9 @@
 
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import Video from 'react-native-video';
+import VideoPlayer from 'react-native-video-controls';
+import Orientation from 'react-native-orientation-locker';
+
 
 // Within your render function, assuming you have a file called
 // "background.mp4" in your project. You can include multiple videos
@@ -15,9 +17,20 @@ const VideoContainer = () => {
     const onBuffer = () => { }
     const videoError = () => { }
 
+    const onEnterFullscreen = () => {
+        console.log("FULL SCREEN");
+        Orientation.lockToLandscapeLeft();
+    }
+
+    const onExitFullscreen = () => {
+        Orientation.lockToPortrait();
+    }
+
     return (
 
-        <Video source={{ uri: VIDEO_URL }} controls={true}
+        <VideoPlayer source={{ uri: VIDEO_URL }}
+            onExitFullscreen={onExitFullscreen} controls={false}
+            onEnterFullscreen={onEnterFullscreen}
             onBuffer={onBuffer}
             onError={videoError}
             style={styles.backgroundVideo} />

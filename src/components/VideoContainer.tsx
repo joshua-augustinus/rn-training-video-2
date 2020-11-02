@@ -12,18 +12,18 @@ import VideoPlayer from 'react-native-video-controls';
 
 const VIDEO_URL = "https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4";
 
-interface Props{
-    onEnterFullScreen:()=>void,
-    onExitFullScreen:()=>void
+interface Props {
+    onEnterFullScreen: () => void,
+
 }
 
-const VideoContainer = (props:Props) => {
+const VideoContainer = (props: Props) => {
     const [paused, setPaused] = useState(true);
-    
+
     const onBuffer = () => { }
     const videoError = () => { }
 
-    const onEnterFullScreen=()=>{
+    const onEnterFullScreen = () => {
         setPaused(true);
         props.onEnterFullScreen();
     }
@@ -32,7 +32,7 @@ const VideoContainer = (props:Props) => {
     return (
 
         <VideoPlayer source={{ uri: VIDEO_URL }} paused={paused}
-            onExitFullscreen={props.onExitFullScreen} controls={false}
+            controls={false}
             onEnterFullscreen={onEnterFullScreen}
             onBuffer={onBuffer}
             onError={videoError}

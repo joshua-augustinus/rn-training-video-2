@@ -20,7 +20,7 @@
     "react-native-safe-area-context": "^3.1.8",
     "react-native-screens": "2.11.0",
     "react-native-video": "^5.1.0-alpha8",
-    "react-native-video-controls": "^2.7.1",
+    "react-native-video-controls": "https://github.com/joshua-augustinus/react-native-video-controls.git#1-change-the-location-of-toggle-full-screen",
     "react-navigation": "^4.0.0",
     "react-navigation-drawer": "^2.6.0",
     "react-navigation-stack": "^2.9.0"

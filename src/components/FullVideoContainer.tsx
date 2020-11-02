@@ -1,9 +1,10 @@
 // Load the module
 
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import VideoPlayer from 'react-native-video-controls';
-
+import Orientation from 'react-native-orientation-locker';
+import { NavigationStackProp } from 'react-navigation-stack';
 
 // Within your render function, assuming you have a file called
 // "background.mp4" in your project. You can include multiple videos
@@ -12,35 +13,39 @@ import VideoPlayer from 'react-native-video-controls';
 
 const VIDEO_URL = "https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4";
 
-interface Props{
-    onEnterFullScreen:()=>void,
-    onExitFullScreen:()=>void
+interface Props {
+    navigation: NavigationStackProp<{}>;
 }
 
-const VideoContainer = (props:Props) => {
-    const [paused, setPaused] = useState(true);
-    
+const FullVideoContainer = (props: Props) => {
     const onBuffer = () => { }
     const videoError = () => { }
 
-    const onEnterFullScreen=()=>{
-        setPaused(true);
-        props.onEnterFullScreen();
-    }
+    useEffect(() => {
 
+        Orientation.lockToLandscapeLeft();
+
+        return () => {
+            Orientation.lockToPortrait();
+        }
+    }, [])
+
+    const onExitFullScreen = () => {
+        props.navigation.goBack();
+    }
 
     return (
 
-        <VideoPlayer source={{ uri: VIDEO_URL }} paused={paused}
-            onExitFullscreen={props.onExitFullScreen} controls={false}
-            onEnterFullscreen={onEnterFullScreen}
+        <VideoPlayer source={{ uri: VIDEO_URL }} disableBack={true}
+            onExitFullscreen={onExitFullScreen}
+            isFullScreen={true}
             onBuffer={onBuffer}
             onError={videoError}
             style={styles.backgroundVideo} />
     )
 }
 
-export { VideoContainer }
+export { FullVideoContainer }
 
 // Later on in your styles..
 var styles = StyleSheet.create({

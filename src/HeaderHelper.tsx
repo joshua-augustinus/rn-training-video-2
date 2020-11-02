@@ -29,6 +29,12 @@ export const getNavigationOptions = (navigation): NavigationOptions => {
     };
 }
 
+export const getEmptyNavigationOptions=()=>{
+    return {
+        headerShown:false
+    }
+}
+
 const styles = StyleSheet.create({
     navRight: {
         flex: 1,

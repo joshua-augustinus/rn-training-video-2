@@ -1,7 +1,7 @@
 // Load the module
 
-import React, { useEffect } from 'react';
-import { StyleSheet } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import { Alert, StyleSheet } from 'react-native';
 import VideoPlayer from 'react-native-video-controls';
 import Orientation from 'react-native-orientation-locker';
 import { NavigationStackProp } from 'react-navigation-stack';
@@ -14,10 +14,13 @@ import { NavigationStackProp } from 'react-navigation-stack';
 const VIDEO_URL = "https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4";
 
 interface Props {
-    navigation: NavigationStackProp<{}>;
+    navigation: NavigationStackProp<{ onUnmount: (currentTime: number) => void }>;
 }
 
 const FullVideoContainer = (props: Props) => {
+    const videoPlayerRef = useRef(null);
+    const onUnmount = props.navigation.getParam('onUnmount', () => { });
+    const startTime = props.navigation.getParam('startTime', 0);
     const onBuffer = () => { }
     const videoError = () => { }
 
@@ -27,6 +30,9 @@ const FullVideoContainer = (props: Props) => {
 
         return () => {
             Orientation.lockToPortrait();
+            const currentTime = videoPlayerRef.current.state.currentTime;
+            console.log("currentTime", currentTime);
+            onUnmount(currentTime);
         }
     }, [])
 
@@ -34,9 +40,14 @@ const FullVideoContainer = (props: Props) => {
         props.navigation.goBack();
     }
 
+    const onLoad = () => {
+        //Seeks to seconds
+        videoPlayerRef.current.seekTo(startTime);
+    }
+
     return (
 
-        <VideoPlayer source={{ uri: VIDEO_URL }} disableBack={true}
+        <VideoPlayer ref={videoPlayerRef} onLoad={onLoad} source={{ uri: VIDEO_URL }} disableBack={true}
             onExitFullscreen={onExitFullScreen}
             isFullScreen={true}
             onBuffer={onBuffer}

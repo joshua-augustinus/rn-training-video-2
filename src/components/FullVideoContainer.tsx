@@ -1,6 +1,6 @@
 // Load the module
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Alert, StyleSheet } from 'react-native';
 import VideoPlayer from 'react-native-video-controls';
 import Orientation from 'react-native-orientation-locker';
@@ -18,6 +18,7 @@ interface Props {
 }
 
 const FullVideoContainer = (props: Props) => {
+    const [paused, setPaused] = useState(false);
     const videoPlayerRef = useRef(null);
     const onUnmount = props.navigation.getParam('onUnmount', () => { });
     const startTime = props.navigation.getParam('startTime', 0);
@@ -37,6 +38,7 @@ const FullVideoContainer = (props: Props) => {
     }, [])
 
     const onExitFullScreen = () => {
+        setPaused(true);//needed
         props.navigation.goBack();
     }
 

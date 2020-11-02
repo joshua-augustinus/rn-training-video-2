@@ -5881,9 +5881,9 @@ react-native-screens@2.11.0:
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.11.0.tgz#34b30b07c2d04aa100cba984b944b303bfa43ea6"
   integrity sha512-vJzJE3zI1XUtqthrX3Dh2TBQWB+xFyaGhF52KBq9FjJUN5ws4xpLZJxBWa1KbGV3DilmcSZ4jmZR5LGordwE7w==
 
-"react-native-video-controls@https://github.com/joshua-augustinus/react-native-video-controls.git#3-make-the-tap-more-responsive":
+"react-native-video-controls@https://github.com/joshua-augustinus/react-native-video-controls.git#5-set-seeker-position-in-seekto":
   version "2.7.1"
-  resolved "https://github.com/joshua-augustinus/react-native-video-controls.git#fbd9e488c0bd47e10d8b89d04d84e2b9689b54fb"
+  resolved "https://github.com/joshua-augustinus/react-native-video-controls.git#a29dbf80595ff8707cac5f951d8bd01be5b14291"
   dependencies:
     lodash "^4.16.4"
 
